@@ -33,6 +33,20 @@ class todoController {
         })
     }
 
+    deleteTodo(req, res) {
+        const id = req.params.id;
+        const index = this.TODOS.findIndex((todo) => todo.id === id)
+        if(index < 0) {
+            throw new Error("Couldn't find todo!")
+            res.json({message: "Could not find todo with such index"})
+        }
+
+        this.TODOS.splice(index, 1)
+        res.json({
+            message: "Deleted todo"
+        })
+    }
+
     getTodos(req, res) {
         res.json({tasks: this.TODOS})
     }
